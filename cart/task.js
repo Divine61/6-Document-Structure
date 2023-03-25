@@ -37,7 +37,8 @@ function isProduct(button) {
   if (cartProduct.find(product => product.dataset.id === id)) {
     const currentProduct = findProduct.querySelector('.cart__product-count');
     const currentQuantity = product.querySelector(".product__quantity-value");
-    currentProduct.innerText = (+currentProduct.textContent) + (+currentQuantity.textContent);
+    currentProduct.innerText = parseInt(currentProduct.textContent) + parseInt(currentQuantity.textContent);
+    // currentProduct.innerText = (+currentProduct.textContent) + (+currentQuantity.textContent);
   } else {
     addProduct(id, image, quantity);
   }

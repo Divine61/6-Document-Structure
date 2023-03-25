@@ -1,22 +1,13 @@
 (function() {
   const taskAdd = document.querySelector(`.tasks__add`);
-  taskAdd.addEventListener(`click`, (elem) => {
+  taskAdd.addEventListener(`click`, (elem => {
     elem.preventDefault();
-    const inputMessage = checkInput();
-    interTasks(inputMessage)});
+    const inputMessage = document.querySelector(`.tasks__input`);
+    inputMessage.value = inputMessage.value.trim();
+    interTasks(inputMessage.value)
+    inputMessage.value = ``;
+  }))
 }())
-
-document.addEventListener(`keydown`, button => {
-  if (button.key.charCodeAt() === 69) {
-    const inputMessage = checkInput();
-    interTasks(inputMessage);
-  }
-})
-
-function checkInput() {
-  const inputMessage = document.querySelector(`.tasks__input`);
-  return inputMessage.value.trim();
-}
 
 function interTasks(toDo) {
   let tasksList = document.querySelector(`.tasks__list`);

@@ -2,7 +2,9 @@
   const tooltips = Array.from(document.querySelectorAll(`.has-tooltip`));
   tooltips.forEach((button, index) => {
     let attr = button.getAttribute(`title`);
-    let hint = creatHint(attr);
+    let posTooltipTop = button.getBoundingClientRect().top;
+    let posTooltipLeft = button.getBoundingClientRect().left;
+    let hint = creatHint(posTooltipTop, posTooltipLeft, attr);
     button.insertAdjacentHTML(`afterEnd`, hint.outerHTML);
     button.addEventListener(`click`, (elem => {
       elem.preventDefault();
@@ -11,10 +13,13 @@
   })
 }())
 
-function creatHint(attribute) {
+function creatHint(posTop, posLeft, attribute) {
   let hint = document.createElement(`div`);
   hint.setAttribute(`class`, `tooltip`);
-  hint.setAttribute(`style`, `left: 0; top: 0`);
+  hint.setAttribute(`style`, `top: ${posTop + 20}px; left: ${posLeft}px`);
+  // hint.setAttribute(`style`, `top: 0; left: 0`);
+  // hint.style.top = posTooltipTop + 20 + `px`;
+  // hint.style.left = posTooltipLeft + `px`;
   hint.textContent = attribute;
   return hint;
 }
